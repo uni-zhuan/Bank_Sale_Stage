@@ -67,8 +67,7 @@ export default {
   name: "home",
   data() {
     return {
-      section: [],
-      post: [],
+      product: [],
       isCollapse: false,
       tabPosition: 'top',
     };
@@ -78,10 +77,20 @@ export default {
     showGoods
   },
   created() {
+    this.getAllPro();
 
   },
   methods: {
-  
+    getAllpro(){
+      this.axios
+        .get("/api/getAllPro")
+        .then(response =>{
+          this.product=response.data;
+        })
+        .catch(error =>{
+          console.log(error);
+        });
+    }
   },
 };
 </script>

@@ -55,15 +55,14 @@
       </el-aside>
       <!-- 主体区域 -->
       <el-main>
-        <show :post="post"></show>
+        <showOrder :post="post"></showOrder>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import show from "./showGoods.vue";
-import customerMessage from "../components/customerMessage.vue";
+import showOrder from "./showOrder.vue";
 export default {
   name: "home",
   data() {
@@ -76,8 +75,7 @@ export default {
   },
 
   components: {
-    show,
-    customerMessage,
+    showOrder,
   },
   created() {
 

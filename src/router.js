@@ -11,6 +11,7 @@ const customerMessage = () => import('./components/customerMessage.vue')
 const orderMessage = () => import('./components/orderMessage.vue')
 const goodsMessage = () => import('./components/goodsMessage.vue')
 const showGoods = () => import('./components/showGoods.vue')
+const showSell = () => import('./components/showSell.vue')
 
 Vue.use(Router)
 
@@ -30,9 +31,9 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/showGoods/:id',
-          name: 'showGoods',
-          component: showGoods,
+          path: '/showSell/:id',
+          name: 'showSell',
+          component: showSell,
         },]
     }, {
       path: '/sellMonitor',
