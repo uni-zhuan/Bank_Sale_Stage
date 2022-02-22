@@ -56,7 +56,7 @@
         prop="detail"
         label="商品详情"
       ></el-table-column>
-      <el-table-column align="center" label="操作" width="130">
+      <el-table-column align="center" label="操作" width="200">
         <template v-slot="scope">
           <!-- 修改 -->
           <el-tooltip
@@ -82,10 +82,10 @@
             :enterable="false"
           >
             <el-button
-              type="primary"
-              icon="el-icon-"
+              type="default"
+              icon="el-icon-setting"
               circle
-              @click="show(scope.row.idproducts)"
+              @click="set(scope.row.idproducts)"
             ></el-button>
           </el-tooltip>
           <!-- 删除 -->
@@ -143,7 +143,49 @@
       </span>
     </el-dialog>
 
-    <!-- 修改员工信息弹出层 -->
+    <!-- 设置秒杀弹出层 -->
+    <el-dialog title="设置为秒杀商品" :visible.sync="setDialogVisible" width="50%">
+      <el-form
+        :model="setfrom"
+        :rules="setrules"
+        ref="setFormref"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+
+        <el-form-item label="秒杀价格" prop="price">
+          <el-input v-model="setfrom.price"></el-input>
+        </el-form-item>
+        <el-form-item label="售卖份数" prop="storage">
+          <el-input v-model="setfrom.storage"></el-input>
+        </el-form-item>
+        <el-form-item label="秒杀开始时间" prop="stime">
+          <el-date-picker
+            v-model="setfrom.stime" 
+            type="datetime"
+            placeholder="选择秒杀开始时间"
+            format="yyyy-MM-dd HH:mm:ss"
+            value-format="yyyy-MM-dd HH:mm:ss">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="秒杀结束时间" prop="etime">
+          <el-date-picker
+            v-model="setfrom.etime"
+            type="datetime"
+            placeholder="选择秒杀结束时间"
+            format="yyyy-MM-dd HH:mm:ss"
+            value-format="yyyy-MM-dd HH:mm:ss">
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="resetForm">清 空</el-button>
+        <el-button type="primary" @click="installForm">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 修改商品信息弹出层 -->
     <el-dialog title="修改商品" :visible.sync="updateDialogVisible" width="50%">
       <el-form
         :model="updatefrom"
@@ -175,7 +217,7 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="resetForm2">清 空</el-button>
-        <el-button type="primary" @click="setForm">确 定</el-button>
+        <el-button type="primary" @click="giveForm">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -186,6 +228,8 @@ export default {
   name: "showGoods",
   data() {
     return {
+      stime:"",
+      etime:"",
       // 输入的搜索内容
       input: "",
       // 商品id
@@ -211,6 +255,28 @@ export default {
           { required: true, message: "请输入商品详情", trigger: "blur" },
         ],
         type: [
+          { required: true, message: "请选择商品类型", trigger: "change" },
+        ],
+      },
+
+      setDialogVisible: false,
+      //   设置秒杀表单的信息
+      setfrom: {
+        price: "",
+        storage: "",
+        stime: "",
+        etime: "",
+      },
+      //   秒杀设置表单表单的验证规则
+      setrules: {
+        price: [{ required: true, message: "请输入商品秒杀价格", trigger: "blur" }],
+        storage: [
+          { required: true, message: "请输入商品售卖份数", trigger: "blur" },
+        ],
+        stime: [
+          { required: true, message: "请输入商品详情", trigger: "change" },
+        ],
+        etime: [
           { required: true, message: "请选择商品类型", trigger: "change" },
         ],
       },
@@ -249,7 +315,6 @@ export default {
   methods: {
     // 提交添加商品表单
     upForm() {
-      console.log("success");
       this.$refs.addFormref.validate((valid) => {
         if (valid) {
           console.log(this.addfrom.pname);
@@ -317,7 +382,7 @@ export default {
           console.log(error);
         });
     },
-    // 得到全部员工信息
+    // 得到全部产品信息
     getAllPro() {
       this.axios.get("/api/getAllPro", { params: {} }).then((response) => {
         console.log(response);
@@ -334,7 +399,7 @@ export default {
     // 删除员工
     async remove(idproducts) {
       const confirmRes = await this.$confirm(
-        "是否确定永久删除该商品, ?",
+        "是否确定永久删除该商品?",
         "提示",
         {
           confirmButtonText: "确定",
@@ -371,7 +436,7 @@ export default {
           this.getAllPro();
         });
     },
-    // 展示编辑员工对话框
+    // 展示编辑商品对话框
     show(idproducts) {
       // 请求该商品的数据
       console.log("请求该商品的数据" + idproducts);
@@ -396,7 +461,7 @@ export default {
       this.$refs.updateFormref.resetFields();
     },
     // 提交修改信息
-    setForm() {
+    giveForm() {
       this.$refs.updateFormref.validate((valid) => {
         if (valid) {
           this.axios
@@ -430,6 +495,69 @@ export default {
             });
         }
       });
+    },
+    // 展示编辑商品对话框
+    set(idproducts) {
+      // 请求该商品的数据
+      console.log("请求该商品的数据" + idproducts);
+      this.axios
+        .get("/api/getPro", {
+          params: {
+            idproducts: idproducts,
+          },
+        })
+        .then((response) => {
+          this.updatefrom = response.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // 展示编辑对话框
+      // console.log(response.data[0]);
+      this.setDialogVisible = true;
+      this.selectid = idproducts;
+    },
+    // 提交设置秒杀信息
+    installForm() {
+      this.$refs.setFormref.validate((valid) => {
+        if (valid) {
+          // console.log("success",this.selectid);
+          this.axios
+            .get("/api/addMPro", {
+              params: {
+                idproducts: this.selectid,
+                storage: this.setfrom.storage,
+                price: this.setfrom.price,
+                stime: this.moment(this.setfrom.stime).format("YYYY-MM-DD HH:mm:ss"),
+                etime: this.moment(this.setfrom.etime).format("YYYY-MM-DD HH:mm:ss"),
+              },
+              
+            })
+            .then((res) => {
+              if (res.data.code !== 200) {
+                return this.$message.error({
+                  duration: 800,
+                  message: "设置失败",
+                });
+              }
+              // 关闭设置对话框
+              this.setDialogVisible = false;
+              // 刷新数据
+              this.getAllPro();
+              this.$message.success({
+                duration: 800,
+                message: "修改成功",
+              });
+              //清空设置秒杀商品表单
+              this.resetForm3();
+            });
+            console.log("success!!!",this.selectid);
+        }
+      });
+    },
+    // 弹出框关闭事件
+    resetForm3() {
+      this.$refs.setFormref.resetFields();
     },
   },
 

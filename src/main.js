@@ -4,12 +4,16 @@ import App from './App.vue'
 import Router from 'vue-router'
 import router from './router'
 import './assets/css/reset.css'
+import Moment from 'moment'
+
+
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from 'axios'
 Vue.prototype.axios = axios;
+Vue.prototype.moment=Moment
 
 Vue.config.productionTip = false
 

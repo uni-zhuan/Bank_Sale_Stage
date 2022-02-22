@@ -2,8 +2,6 @@
 // 通过 Vue.js，我们已经用组件组成了我们的应用。当加入 Vue Router 时，我们需要做的就是将我们的组件映射到路由上，让 Vue Router 知道在哪里渲染它们
 import Vue from 'vue'
 import Router from 'vue-router'
-
-
 const Home = () => import('./views/Home.vue')
 const Login = () => import('./views/Login.vue')
 const sellMonitor = () => import('./components/sellMonitor.vue')
