@@ -6,8 +6,9 @@ h2 {
 }
 #barplot {
   height: 250px;
-  width:250px;
-  margin: 30px auto;
+  width:400px;
+  margin: auto auto;
+  text-align: center;
 }
 </style>
 <template>
@@ -23,34 +24,35 @@ export default {
     return {};
   },
   mounted() {
-    // console.log("dayingle");
-    let this_ = this;
     let myChart_barplot = echarts.init(document.getElementById("barplot"));
     let option = {
+
   tooltip: {
     trigger: 'axis',
     axisPointer: {
       // Use axis to trigger tooltip
       type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
+    },
+
   },
-  legend: {},
+  legend: {padding: [20,10,10,10]},
   grid: {
     left: '3%',
     right: '4%',
     bottom: '3%',
-    containLabel: true
+    containLabel: true,
+    
   },
   xAxis: {
     type: 'value'
   },
   yAxis: {
     type: 'category',
-    data: ['5位', '4位', '3位', '2位', '1位']
+    data: ['销售额5位', '销售额4位', '销售额3位', '销售额2位', '销售额1位']
   },
   series: [
     {
-      name: '商品库存',
+      name: '库存',
       type: 'bar',
       stack: 'total',
       label: {
@@ -65,11 +67,12 @@ export default {
       data: [320, 302, 301, 334, 390]
     },
     {
-      name: '已下单秒杀数量',
+      name: '已下单秒杀',
       type: 'bar',
       stack: 'total',
       label: {
         show: true
+        
       },
       emphasis: {
         focus: 'series'
@@ -80,11 +83,11 @@ export default {
       data: [120, 132, 101, 134, 90]
     },
     {
-      name: '剩余可秒杀数量',
+      name: '剩余可秒杀',
       type: 'bar',
       stack: 'total',
       label: {
-        show: true
+        show: true,
       },
       emphasis: {
         focus: 'series'

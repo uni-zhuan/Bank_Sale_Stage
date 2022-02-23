@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import charts from "../components/charts.vue";
+import charts from "./charts.vue";
 export default {
   name: "home",
   data() {
@@ -74,15 +74,19 @@ export default {
       section: [],
       post: [],
       isCollapse: false,
-      tabPosition: "top",
+      tabPosition: 'top',
     };
   },
 
   components: {
     charts,
   },
-  created() {},
-  methods: {},
+  created() {
+
+  },
+  methods: {
+  
+  },
 };
 </script>
 

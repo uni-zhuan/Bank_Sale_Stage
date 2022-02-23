@@ -1,11 +1,11 @@
 <!--components 一般用于存放非路由组件（还有全局组件）-->
 <template>
-  <div>
+  <div class="show">
     <el-row :gutter="20">
-      <el-col :span="11" gutter="30">
+      <el-col>
         <el-row :gutter="155">
-          <div class="grid-content bg-purple">
-            <el-col span="16">
+          <div class="grid-content bg-purple search">
+            <el-col span="6">
               <el-input
                 v-model="input"
                 placeholder="输入你想搜索的秒杀商品ID"
@@ -14,11 +14,12 @@
               ></el-input>
             </el-col>
 
-            <el-col span="4"
-              ><el-button plain @click="getMPro" style="width: 100px" span="4"
+            <el-col span="1.5"
+              ><el-button plain @click="getMPro" style="width: 100px"
                 >搜索</el-button
               ></el-col
             >
+            <el-col span="18.5"> </el-col>
           </div>
         </el-row>
         <el-row>
@@ -33,19 +34,19 @@
               align="center"
               prop="idms"
               label="商品ID"
-              width="80"
+
             ></el-table-column>
             <el-table-column
               align="center"
               prop="pname"
               label="商品名"
-              width="120"
+
             ></el-table-column>
 
             <el-table-column
               align="center"
               prop="price"
-              width="120"
+
               label="秒杀价格"
             ></el-table-column>
 
@@ -92,14 +93,13 @@
           </el-table>
         </el-row>
       </el-col>
-      <el-col :span="13">
-        <!-- echart组件 -->
-        <!-- <e_chart :post="post"></e_chart> -->
-        <!-- <e_pan :post="post"></e_pan> -->
-        <!-- <e_barplot :post="post"></e_barplot> -->
-        <charts :post="post"></charts>
-
-      </el-col>
+      <!-- <el-col :span="13"> -->
+      <!-- echart组件 -->
+      <!-- <e_chart :post="post"></e_chart> -->
+      <!-- <e_pan :post="post"></e_pan> -->
+      <!-- <e_barplot :post="post"></e_barplot> -->
+      <!-- <charts :post="post"></charts> -->
+      <!-- </el-col> -->
     </el-row>
     <el-dialog
       title="修改秒杀商品"
@@ -147,7 +147,7 @@
 
 <script>
 // import e_barplot from "./e_barplot.vue"
-import charts from "./charts.vue"
+import charts from "./charts.vue";
 
 // import e_chart from "./e_chart.vue"
 // import e_pan from "./e_pan.vue"
@@ -157,7 +157,7 @@ export default {
     // e_chart,
     // e_pan,
     // e_barplot,
-    charts
+    charts,
   },
   name: "show",
   data() {

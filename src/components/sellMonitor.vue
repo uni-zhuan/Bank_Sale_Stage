@@ -35,9 +35,13 @@
           active-text-color="#1391E3"
           router="true"
         >
-          <el-menu-item index="/sellMonitor" style="height: 60px">
+          <el-menu-item index="/showcharts">
             <i class="el-icon-view"></i>
             <span slot="title">秒杀实时监控</span>
+          </el-menu-item>
+          <el-menu-item index="/sellMonitor" style="height: 60px">
+            <i class="el-icon-bell"></i>
+            <span slot="title">秒杀商品管理</span>
           </el-menu-item>
           <el-menu-item index="/customerMessage" style="height: 60px">
             <i class="el-icon-menu"></i>

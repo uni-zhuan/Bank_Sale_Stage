@@ -65,16 +65,16 @@ import * as echarts from 'echarts'
     text: '秒杀情况实时监控',
     padding: [20,20,100,100],
   },
-  // toolbox: {
-  //   feature: {
-  //     dataZoom: {
-  //       yAxisIndex: 'none'
-  //     },
-  //     restore: {},
-  //     saveAsImage: {}
-  //   },
-  //   padding: [20,20,100,100],
-  // },
+  toolbox: {
+    feature: {
+      dataZoom: {
+        yAxisIndex: 'none'
+      },
+      restore: {},
+      saveAsImage: {}
+    },
+    padding: [20,20,100,100],
+  },
   xAxis: {
     type: 'category',
     boundaryGap: false,

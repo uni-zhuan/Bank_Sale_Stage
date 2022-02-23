@@ -7,7 +7,7 @@
   #pan{
     height: 250px;
     width:400px;
-    margin: 0 auto;
+    margin: auto auto;
   }
 </style>
 <template>
@@ -99,3 +99,8 @@ import * as echarts from 'echarts'
     }
   }
 </script>
+<style>
+
+
+
+</style>
