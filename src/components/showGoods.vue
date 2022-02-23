@@ -4,14 +4,37 @@
     <!-- 头部搜索 -->
     <div class="search">
       <el-row>
-        <el-col :span="21">
+        
+        <!-- <el-col :span="2">
+                    <div class="grid-content bg-purple">
+<el-dropdown :hide-on-click="false">
+  <span class="el-dropdown-link">
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+                    </div>
+
+        </el-col> -->
+        <el-col :span="17">
           <div class="grid-content bg-purple">
+            <el-select v-model="option" placeholder="查询内容" style="width:150px">
+              <el-option label="商品名" value="0"></el-option>
+              <el-option label="商品价格" value="1"></el-option>
+              <el-option label="商品类型" value="2"></el-option>
+            </el-select>
             <el-input
               v-model="input"
               placeholder="输入你想搜索的商品ID"
               clearable
             ></el-input>
-            <el-button plain @click="getPro">搜索</el-button>
+            <el-button plain @click="findPro">搜索</el-button>
           </div>
         </el-col>
         <el-col :span="3">
@@ -144,7 +167,11 @@
     </el-dialog>
 
     <!-- 设置秒杀弹出层 -->
-    <el-dialog title="设置为秒杀商品" :visible.sync="setDialogVisible" width="50%">
+    <el-dialog
+      title="设置为秒杀商品"
+      :visible.sync="setDialogVisible"
+      width="50%"
+    >
       <el-form
         :model="setfrom"
         :rules="setrules"
@@ -152,7 +179,6 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-
         <el-form-item label="秒杀价格" prop="price">
           <el-input v-model="setfrom.price"></el-input>
         </el-form-item>
@@ -161,11 +187,12 @@
         </el-form-item>
         <el-form-item label="秒杀开始时间" prop="stime">
           <el-date-picker
-            v-model="setfrom.stime" 
+            v-model="setfrom.stime"
             type="datetime"
             placeholder="选择秒杀开始时间"
             format="yyyy-MM-dd HH:mm:ss"
-            value-format="yyyy-MM-dd HH:mm:ss">
+            value-format="yyyy-MM-dd HH:mm:ss"
+          >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="秒杀结束时间" prop="etime">
@@ -174,7 +201,8 @@
             type="datetime"
             placeholder="选择秒杀结束时间"
             format="yyyy-MM-dd HH:mm:ss"
-            value-format="yyyy-MM-dd HH:mm:ss">
+            value-format="yyyy-MM-dd HH:mm:ss"
+          >
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -228,8 +256,10 @@ export default {
   name: "showGoods",
   data() {
     return {
-      stime:"",
-      etime:"",
+      stime: "",
+      etime: "",
+      //选择的输入项
+      option:"",
       // 输入的搜索内容
       input: "",
       // 商品id
@@ -269,7 +299,9 @@ export default {
       },
       //   秒杀设置表单表单的验证规则
       setrules: {
-        price: [{ required: true, message: "请输入商品秒杀价格", trigger: "blur" }],
+        price: [
+          { required: true, message: "请输入商品秒杀价格", trigger: "blur" },
+        ],
         storage: [
           { required: true, message: "请输入商品售卖份数", trigger: "blur" },
         ],
@@ -359,12 +391,26 @@ export default {
       this.$refs.addFormref.resetFields();
     },
     // 按照搜索内容搜索员工
-    getPro() {
-      console.log(this.input);
+      findPro() {
+      console.log(this.input,this.option);
       this.axios
-        .get("/api/getPro", {
+
+        .get("/api/findPro", {
           params: {
-            idproducts: this.input,
+            // if(this.option===0)
+            // {
+            //               choice:this.option,
+            // pname: this.input,
+            // }
+            // else if(this.option===1)
+            // {
+            //   choice:this.
+            // }
+            choice:this.option,
+            pname: this.input,
+            price:this.input,
+            type:this.input,
+
           },
         })
         .then((response) => {
@@ -382,6 +428,29 @@ export default {
           console.log(error);
         });
     },
+    // getPro() {
+    //   console.log(this.input);
+    //   this.axios
+    //     .get("/api/getPro", {
+    //       params: {
+    //         idproducts: this.input,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(response);
+    //       this.product_show = response.data;
+    //       for (let i = 0; i < this.product_show.length; i++) {
+    //         for (let j = 0; j < this.get.length; j++) {
+    //           if (this.product_show[i].poid === this.get[j].idproducts) {
+    //             this.product_show[i].poid = this.get[j].idproducts;
+    //           }
+    //         }
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
     // 得到全部产品信息
     getAllPro() {
       this.axios.get("/api/getAllPro", { params: {} }).then((response) => {
@@ -528,10 +597,13 @@ export default {
                 idproducts: this.selectid,
                 storage: this.setfrom.storage,
                 price: this.setfrom.price,
-                stime: this.moment(this.setfrom.stime).format("YYYY-MM-DD HH:mm:ss"),
-                etime: this.moment(this.setfrom.etime).format("YYYY-MM-DD HH:mm:ss"),
+                stime: this.moment(this.setfrom.stime).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                ),
+                etime: this.moment(this.setfrom.etime).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                ),
               },
-              
             })
             .then((res) => {
               if (res.data.code !== 200) {
@@ -551,7 +623,7 @@ export default {
               //清空设置秒杀商品表单
               this.resetForm3();
             });
-            console.log("success!!!",this.selectid);
+          console.log("success!!!", this.selectid);
         }
       });
     },
@@ -563,7 +635,7 @@ export default {
 
   watch: {
     // 如果路由有变化，会再次执行该方法
-    $route: "getPro",
+    $route: "getAllPro",
   },
   filters: {},
 };
@@ -584,5 +656,17 @@ export default {
   .el-table {
     margin-top: 40px;
   }
+
+  .el-dropdown-link {
+    cursor: pointer;
+   }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .el-dropdown{
+        margin-top: 10px;
+        width: 100px;
+  }
+
 }
 </style>

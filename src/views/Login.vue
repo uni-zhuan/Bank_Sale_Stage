@@ -3,7 +3,7 @@
   <div class="login">
     <el-card>
       <div style="text-align: center">
-        <img src="../assets/bank.png" alt=""  width=60% style="display: inline-block;">
+        <img src="../assets/logo.png" alt=""  width=60% style="display: inline-block;">
       </div>
       <h2>系统管理员登陆</h2>
       <el-form
