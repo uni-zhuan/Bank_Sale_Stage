@@ -2,17 +2,17 @@
 <style scoped>
   h2{
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     font-size: 18px;
   }
-  #chart_example{
-    height: 300px;
+  #chart{
+    height: 250px;
     margin: 0 auto;
   }
 </style>
 <template>
   <div>
-    <div id="chart_example">
+    <div id="chart">
     </div>
   </div>
 </template>
@@ -52,7 +52,7 @@ import * as echarts from 'echarts'
     //   console.log(xtime);
     //   console.log(ynum);
 
-      let myChart = echarts.init(document.getElementById('chart_example'));
+      let myChart_chart = echarts.init(document.getElementById('chart'));
       let option = {
   tooltip: {
     trigger: 'axis',
@@ -65,16 +65,16 @@ import * as echarts from 'echarts'
     text: '秒杀情况实时监控',
     padding: [20,20,100,100],
   },
-  toolbox: {
-    feature: {
-      dataZoom: {
-        yAxisIndex: 'none'
-      },
-      restore: {},
-      saveAsImage: {}
-    },
-    padding: [20,20,100,100],
-  },
+  // toolbox: {
+  //   feature: {
+  //     dataZoom: {
+  //       yAxisIndex: 'none'
+  //     },
+  //     restore: {},
+  //     saveAsImage: {}
+  //   },
+  //   padding: [20,20,100,100],
+  // },
   xAxis: {
     type: 'category',
     boundaryGap: false,
@@ -121,10 +121,10 @@ import * as echarts from 'echarts'
     }
   ]
       };
-      myChart.setOption(option);
+      myChart_chart.setOption(option);
  
       //建议加上以下这一行代码，不加的效果图如下（当浏览器窗口缩小的时候）。超过了div的界限（红色边框）
-      window.addEventListener('resize',function() {myChart.resize()});
+      window.addEventListener('resize',function() {myChart_chart.resize()});
     },
     methods: {
         

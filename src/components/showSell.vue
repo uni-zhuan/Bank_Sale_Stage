@@ -1,8 +1,8 @@
 <!--components 一般用于存放非路由组件（还有全局组件）-->
 <template>
   <div>
-    <el-row :gutter="30">
-      <el-col :span="12" gutter="70">
+    <el-row :gutter="20">
+      <el-col :span="11" gutter="30">
         <el-row :gutter="155">
           <div class="grid-content bg-purple">
             <el-col span="16">
@@ -32,13 +32,13 @@
             <el-table-column
               align="center"
               prop="idms"
-              label="秒杀商品ID"
-              width="120"
+              label="商品ID"
+              width="80"
             ></el-table-column>
             <el-table-column
               align="center"
               prop="pname"
-              label="秒杀商品名"
+              label="商品名"
               width="120"
             ></el-table-column>
 
@@ -46,7 +46,7 @@
               align="center"
               prop="price"
               width="120"
-              label="秒杀商品价格"
+              label="秒杀价格"
             ></el-table-column>
 
             <el-table-column
@@ -92,11 +92,12 @@
           </el-table>
         </el-row>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="13">
         <!-- echart组件 -->
         <!-- <e_chart :post="post"></e_chart> -->
         <!-- <e_pan :post="post"></e_pan> -->
-        <e-bar :post="post"></e-bar>
+        <!-- <e_barplot :post="post"></e_barplot> -->
+        <charts :post="post"></charts>
 
       </el-col>
     </el-row>
@@ -145,16 +146,18 @@
 </template>
 
 <script>
-import my_bar from "./e_bar.vue"
+// import e_barplot from "./e_barplot.vue"
+import charts from "./charts.vue"
 
-import e_chart from "./e_chart.vue"
-import e_pan from "./e_pan.vue"
+// import e_chart from "./e_chart.vue"
+// import e_pan from "./e_pan.vue"
 
 export default {
   components: {
     // e_chart,
     // e_pan,
-    my_bar,
+    // e_barplot,
+    charts
   },
   name: "show",
   data() {

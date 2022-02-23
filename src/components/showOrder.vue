@@ -250,7 +250,7 @@ export default {
     resetForm() {
       this.$refs.addFormref.resetFields();
     },
-    // 按照搜索内容搜索员工
+    // 按照用户id搜索该用户订单
     getOrder() {
       this.axios
         .get("/api/getOrder", {
@@ -275,6 +275,7 @@ export default {
     },
 
     getOrderById() {
+      console.log(this.inputid);
       this.axios
         .get("/api/getOrderById", {
           params: {

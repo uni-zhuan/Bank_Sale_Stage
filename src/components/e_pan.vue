@@ -4,14 +4,15 @@
     padding: 30px;
     font-size: 18px;
   }
-  #chart_example{
-    height: 300px;
+  #pan{
+    height: 250px;
+    width:400px;
     margin: 0 auto;
   }
 </style>
 <template>
   <div>
-    <div id="chart_example">
+    <div id="pan">
     </div>
   </div>
 </template>
@@ -23,12 +24,7 @@ import * as echarts from 'echarts'
       return {}
     },
     mounted() {
-      let this_ = this;
-
-    //   console.log(xtime);
-    //   console.log(ynum);
-
-      let myChart = echarts.init(document.getElementById('chart_example'));
+      let myChart_pan = echarts.init(document.getElementById('pan'));
       let option = {
 
   title: {
@@ -80,7 +76,7 @@ import * as echarts from 'echarts'
       itemStyle: {
         color: '#c23531',
         shadowBlur: 200,
-        shadowColor: 'rgba(0, 0, 0, 0.5)'
+        shadowColor: 'rgba(0, 0, 0, 0.0)'
       },
       animationType: 'scale',
       animationEasing: 'elasticOut',
@@ -90,10 +86,10 @@ import * as echarts from 'echarts'
     }
   ]
 };
-      myChart.setOption(option);
+      myChart_pan.setOption(option);
  
       //建议加上以下这一行代码，不加的效果图如下（当浏览器窗口缩小的时候）。超过了div的界限（红色边框）
-      window.addEventListener('resize',function() {myChart.resize()});
+      window.addEventListener('resize',function() {myChart_pan.resize()});
     },
     methods: {
         

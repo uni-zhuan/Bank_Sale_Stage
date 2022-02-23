@@ -1,6 +1,6 @@
 <!--components 一般用于存放非路由组件（还有全局组件）-->
 <template>
-  <div class="show">
+  <div class="show" >
     <!-- 头部搜索 -->
     <div class="search">
       <el-row>

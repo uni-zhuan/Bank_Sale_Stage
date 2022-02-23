@@ -23,7 +23,7 @@
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="230px">
+      <el-aside width="180px">
         <el-menu
           :default-active="this.$route.path"
           class="el-menu-vertical-demo"
@@ -107,7 +107,7 @@ export default {
   }
   .el-aside {
     background-color: #5d6371;
-    padding: 10px 15px;
+    padding: 5px 10px;
     .toggle_btn {
       background-color: pink;
       color: #fff;
