@@ -5,9 +5,6 @@ import Router from 'vue-router'
 import router from './router'
 import './assets/css/reset.css'
 import Moment from 'moment'
-
-
-
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 

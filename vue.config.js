@@ -10,7 +10,7 @@ module.exports = {
           // 注意是以/api开头，即：axios.post({url: '/api/xxx/xxx'})
           target: 'http://localhost:3000',
           // 此处target的意义在于：造成跨域是因为访
-          // 问的host与我们的请求头里的origin不一致，所以我们要设置成一致，这个具体请看下文
+          // 问的host与我们的请求头里的origin不一致，所以我们要设置成  一致，这个具体请看下文
           changeOrigin: true,
           pathRewrite: {'^/api': ''}
           // 此处是大部分文章都不会明说的的地方，

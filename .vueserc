@@ -1,0 +1,25 @@
+{
+  "include": [
+    "./src/components/charts.vue",
+    "./src/components/customerMessage.vue",
+    "./src/components/e_barplot.vue",
+    "./src/components/e_chart.vue",
+    "./src/components/e_pan.vue",
+    "./src/components/goodsMessage.vue",
+    "./src/components/orderMessage.vue",
+    "./src/components/sellMonitor.vue",
+    "./src/components/showGoods.vue",
+    "./src/components/showcharts.vue",
+    "./src/components/showCustomer.vue",
+    "./src/components/showOrder.vue",
+    "./src/components/showSell.vue",
+    "./src/App.vue",
+    "./views/Home.vue",
+    "./views/Login.vue"
+
+
+  ],
+  "title": "app-doc",
+  "genType": "docute",
+  "outDir": "./docs"
+}

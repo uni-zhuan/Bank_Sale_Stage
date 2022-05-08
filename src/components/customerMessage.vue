@@ -1,4 +1,4 @@
-<template>
+  <template>
   <el-container>
     <!-- 头部 -->
     <el-header style="height: 100px">
@@ -6,7 +6,7 @@
         <el-col :span="3">
           <div style="text-align: center">
             <img
-              src="../assets/logo.png"
+              src="../assets/logochang.png"
               alt=""
               width="100%"
               style="display: inline-block"

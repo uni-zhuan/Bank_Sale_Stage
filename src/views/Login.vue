@@ -3,7 +3,7 @@
   <div class="login">
     <el-card>
       <div style="text-align: center">
-        <img src="../assets/logo.png" alt=""  width=60% style="display: inline-block;">
+        <img src="../assets/logofang.png" alt=""  width=60% style="display: inline-block;">
       </div>
       <h2>系统管理员登陆</h2>
       <el-form
@@ -19,9 +19,9 @@
         <el-form-item prop="password">
           <el-input
             v-model="model.password"
-            placeholder="Password"
-            type="password"
-            prefix-icon="fas fa-lock"
+              placeholder="Password"
+              type="password"
+              prefix-icon="fas fa-lock"
           ></el-input>
         </el-form-item>
         <el-form-item>

@@ -4,24 +4,6 @@
     <!-- 头部搜索 -->
     <div class="search">
       <el-row>
-        
-        <!-- <el-col :span="2">
-                    <div class="grid-content bg-purple">
-<el-dropdown :hide-on-click="false">
-  <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-                    </div>
-
-        </el-col> -->
         <el-col :span="17">
           <div class="grid-content bg-purple">
             <el-select v-model="option" placeholder="查询内容" style="width:150px">
@@ -31,7 +13,7 @@
             </el-select>
             <el-input
               v-model="input"
-              placeholder="输入你想搜索的商品ID"
+              placeholder="输入你想搜索的商品内容"
               clearable
             ></el-input>
             <el-button plain @click="findPro">搜索</el-button>
@@ -397,15 +379,6 @@ export default {
 
         .get("/api/findPro", {
           params: {
-            // if(this.option===0)
-            // {
-            //               choice:this.option,
-            // pname: this.input,
-            // }
-            // else if(this.option===1)
-            // {
-            //   choice:this.
-            // }
             choice:this.option,
             pname: this.input,
             price:this.input,
@@ -428,29 +401,7 @@ export default {
           console.log(error);
         });
     },
-    // getPro() {
-    //   console.log(this.input);
-    //   this.axios
-    //     .get("/api/getPro", {
-    //       params: {
-    //         idproducts: this.input,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       console.log(response);
-    //       this.product_show = response.data;
-    //       for (let i = 0; i < this.product_show.length; i++) {
-    //         for (let j = 0; j < this.get.length; j++) {
-    //           if (this.product_show[i].poid === this.get[j].idproducts) {
-    //             this.product_show[i].poid = this.get[j].idproducts;
-    //           }
-    //         }
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+
     // 得到全部产品信息
     getAllPro() {
       this.axios.get("/api/getAllPro", { params: {} }).then((response) => {
@@ -570,7 +521,7 @@ export default {
       // 请求该商品的数据
       console.log("请求该商品的数据" + idproducts);
       this.axios
-        .get("/api/getPro", {
+        .get("idproducts", {
           params: {
             idproducts: idproducts,
           },

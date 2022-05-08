@@ -6,7 +6,7 @@
         <el-col :span="3">
           <div style="text-align: center">
             <img
-              src="../assets/logo.png"
+              src="../assets/logofang.png"
               alt=""
               width="100%"
               style="display: inline-block"
